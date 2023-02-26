@@ -38,3 +38,4 @@ def test_index():
     assert b'submit' in response.content
     assert b'url' in response.content
     assert b'handsontable' in response.content
+    assert b'gsi/client' in response.content

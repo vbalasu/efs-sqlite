@@ -10,8 +10,27 @@
 </head>
 <body>
     <div class="container">
+        <!-- BEGIN Pasted block -->
+        <div id="g_id_onload"
+            data-client_id="893193964658-7ea7od8be0kom1ih5mc72jsa5nuo1dcp.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-callback="authenticated"
+            data-auto_prompt="false">
+        </div>
+
+        <div class="g_id_signin"
+            data-type="standard"
+            data-shape="pill"
+            data-theme="outline"
+            data-text="signin"
+            data-size="large"
+            data-logo_alignment="left">
+        </div>
+        <!-- END Pasted block -->
+
         <h1>Query</h1>
-        <form>
+        <form id="mainform" style="display:none">
             <div class="form-group">
                 <label for="file">File: </label>
                 <input type="text" name="file" id="file" value="/mnt/lambda/efs-sqlite/northwind.db">
@@ -33,6 +52,8 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js" integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/8.3.2/handsontable.full.min.js" integrity="sha512-QKxTQfGv2U/EFV8WPXb0i/TtwNzacYyd6JE0bP1LHhSYu0aivteQYaE7uNi3IvyF6h+Z2oo7GUWXbYhlGrXUng==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jose/4.12.0/index.umd.min.js" integrity="sha512-3E2ooSfPFtmusjkwLznkdT1bCebuxIk6PRxWny6Zcuw9mGt7C672EI9ryq3Y/ScbTqxG8xS7+ChS1hIQHGj8QA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         document.getElementById('submit').addEventListener('click', (event)=>{
             event.preventDefault();
@@ -67,6 +88,13 @@
                 licenseKey: 'non-commercial-and-evaluation',
                 minSpareRows: 1
             });
+        }
+
+        function authenticated(response) {
+            var token = response.credential;
+            document.getElementById('token').value = token;
+            console.log(jose.decodeJwt(token));
+            document.getElementById('mainform').style.display = 'block';
         }
     </script>
 </body>
