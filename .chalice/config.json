@@ -1,0 +1,13 @@
+{
+  "version": "2.0",
+  "app_name": "efs-sqlite",
+  "manage_iam_role": false,
+  "iam_role_arn": "arn:aws:iam::251566558623:role/lambda-efs",
+  "subnet_ids": ["subnet-3f47a602", "subnet-865464f1", "subnet-7875f774", "subnet-0d357e54", "subnet-7cea9657", "subnet-9b1e79fe"],
+  "security_group_ids": ["sg-03450fa9bfb997668"],
+  "stages": {
+    "dev": {
+      "api_gateway_stage": "api"
+    }
+  }
+}
